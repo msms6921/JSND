@@ -175,23 +175,3 @@ Numba와 기존 coverage 7.4.4의 API 충돌은 coverage 7.10.6으로 맞춰 JIT
 `real_binary_link_check.json`, `standard_environment_check.json`.
 원래 실행 코드와 launch 파일에는 수정이 없습니다.
 
-## 시뮬레이션이 필요한 경우
-
-시뮬레이션용 옵션은 전역 bashrc에서 빼고 해당 실행에만 지정합니다.
-실차 도메인 173과 분리한 174를 사용합니다:
-
-```bash
-ROS_DOMAIN_ID=174 \
-RAYCASTER_DIR="$HOME/JSND/src/racing_stack/race_utils/raycaster" \
-PYGLET_SHADOW_WINDOW=False \
-ros2 launch stack_master race.launch.xml sim:=true map:=test0
-```
-
-원본 시뮬레이션은 RViz와 키보드 노드를 항상 실행하므로 접근 가능한 데스크톱이 필요합니다.
-별도 실행 스크립트는 사용하지 않습니다. `f` 맵은 현재 없으므로 복원 전에는 사용할 수 없습니다.
-
-DDS 수정 후 실제 `ros2 launch stack_master pitwall.launch.xml`도 별도로 실행해
-RViz와 rqt_reconfigure 두 ROS 노드, NVIDIA OpenGL 4.6 초기화 및 시작 오류가 없는 것을
-확인했습니다. 이 검증에서 생성한 GUI와 확인용 노드는 모두 종료했습니다.
-차량 노드나 주행 명령은 실행하지 않았습니다.
-로그: `~/JSND/log/pitwall_dds_20261112_150259/result.json` 및 같은 폴더의 `launch.log`.
